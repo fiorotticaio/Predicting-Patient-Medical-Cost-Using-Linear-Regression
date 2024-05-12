@@ -34,8 +34,8 @@ model.fit(X_train, y_train)
 # Fazer predições nos dados de teste
 y_pred = model.predict(X_test)
 
-
-print(y_pred)
+# Conferindo se y_pred e y_test possuem o mesmo tamanho
+assert y_pred.shape == y_test.shape
 
 # Calcular métricas de avaliação
 mae = mean_absolute_error(y_test, y_pred)

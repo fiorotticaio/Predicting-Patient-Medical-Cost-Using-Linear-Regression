@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import max_error, mean_absolute_error, root_mean_squared_error, mean_absolute_percentage_error, mean_squared_error, median_absolute_error, r2_score
 
 # Carregar os dados do arquivo CSV
 data = pd.read_csv("insurance.csv")
@@ -34,10 +34,23 @@ model.fit(X_train, y_train)
 # Fazer predições nos dados de teste
 y_pred = model.predict(X_test)
 
-# Avaliar o desempenho do modelo
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
 
-print("\nDesempenho do modelo:")
-print(f"MSE (Mean Squared Error): {mse}")
-print(f"R^2 Score: {r2}")
+print(y_pred)
+
+# Calcular métricas de avaliação
+mae = mean_absolute_error(y_test, y_pred)
+mse = mean_squared_error(y_test, y_pred)
+rmse = root_mean_squared_error(y_test, y_pred)
+mape = mean_absolute_percentage_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+median_ae = median_absolute_error(y_test, y_pred)
+max_err = max_error(y_test, y_pred)
+
+# Imprimir métricas
+print(f"Mean Absolute Error: {mae:.2f}")
+print(f"Mean Squared Error: {mse:.2f}")
+print(f"Root Mean Squared Error: {rmse:.2f}")
+print(f"Mean Absolute Percentage Error: {mape:.2%}")
+print(f"R^2 Score: {r2:.2f}")
+print(f"Median Absolute Error: {median_ae:.2f}")
+print(f"Max Error: {max_err:.2f}")
